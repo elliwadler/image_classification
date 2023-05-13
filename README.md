@@ -4,7 +4,7 @@ Im Laufe dieses Demo wird ein **Machine-Learnin-Modell** entwickelt, welches in 
 ![cats and dogs](/header.gif)
 
 ## Anforderungen
-Für dieses Demo wird nicht vorausgesetzt, da wir in [Google Colab](https://colab.research.google.com/) arbeiten werden.
+Für dieses Demo wird nichts vorausgesetzt, da wir in [Google Colab](https://colab.research.google.com/) arbeiten werden.
 
 ## Einleitung 
 
@@ -29,7 +29,7 @@ Für dieses Demo wird nicht vorausgesetzt, da wir in [Google Colab](https://cola
 
 ## Datensatz
 
-https://storage.googleapis.com/mledu-datasets/cats_and_dogs_filtered.zip ist ein öffentlich verfügbares Datenset, das vom Machine Learning Education Team von Google bereitgestellt wird. 
+https://storage.googleapis.com/mledu-datasets/cats_and_dogs_filtered.zip ist ein öffentlich verfügbares Datenset, das vom "Machine Learning Education" Team von Google bereitgestellt wird. 
 Der Datensatz enthält **3000 Bilder** von Hunden und Katzen mit den **Labels**:
 - 1 = Hund
 - 0 = Katze 
@@ -47,10 +47,16 @@ Grundsätzlich werden bei der Ersellung eines Bildklassifizierungsmodell drei se
 2. Validierungsdaten, welche zur Validierung während des Trainings dienen
 3. Testdaten, um das fetig trainierte Model zu testen
 
-Es muss sichergestellt werden, dass alle Bilder richtig kategorisiert wurden. Die Bilder müssen alle auf die gleiche Größe gebracht werden. Es ist üblich Augmenterungstechniken auf die Bilder im Trainingsdatensatz anzuwenden. 
+Es muss sichergestellt werden, dass alle Bilder **richtig kategorisiert** wurden. Die Bilder müssen alle auf die gleiche Größe skaliert werden. Es ist üblich **Augmenterungstechniken** (drehen, zoomen, spiegeln, ...) auf die Bilder im Trainingsdatensatz anzuwenden. So kann ein kleiner Datensatz künstlicher vergrößert werden.
 
 ### Model definieren
+In TensorFlow kann mithilfe der Keras-API ein mehrschichtiges neuronales Netz definiert werden. In unserem Beispiel wird damit ein sequenzielles neuronales Netz aufgebaut. Die Ausgabe einer jeden Schicht dient dabei als Eingabe der nächsten Schicht. Die Netztopologie kann somit einfach von oben nach unten gelesen werden.
 
+![model](/model_definition.png)  
+
+In diesem neuronalen Netz, auch Modell genannt, wird in der ersten Schicht die Dimensionierung der Eingaben mit dem Parameter input_shape festgelegt. Unser Datensatz enthält Bilder der Größe von 150 x 150 Pixeln und drei Farbkanäle. Als erste Schicht wird eine Convolution angewandt, welche auf dem Eingabebild eine Faltung mit 32 Filtern durchführt. Dadurch ergibt sich als Resultat eine Ausgabe der Dimensionierung 148 x 148 x 32.  
+
+Der Aufbau des gesamten neuronalen Netzes ist damit definiert. Mit Zeile acht können Details zum neuronalen Netz ausgegeben werden. Die Ausgabe enthält die gerade konfigurierten Werte sowie die Anzahl der lernbaren Parameter. Die Anzahl der Parameter der einzelnen Schichten kann einen Eindruck ihrer Berechnungskomplexität vermitteln.
             
 ## Autor
 Elisabeth Wadler
