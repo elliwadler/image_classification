@@ -2,6 +2,7 @@
 
 Im Laufe dieser Demo wird ein **Machine-Learning-Modell** entwickelt, welches in der Lage ist zwischen Bildern von **Katzen und Hunden** zu unterscheiden. Das Modell wird auf einem **neuralen Netzwerk** basieren und wird mit einer umfangreichen Datensammlung **überwacht,** trainiert. 
 ![cats and dogs](/header.gif)
+Quelle: https://raihanrnj.medium.com/deep-learning-simple-image-classification-using-convolutional-neural-network-dog-and-cat-8c99aef29e8
 
 ## Anforderungen
 Für diese Demo wird nichts vorausgesetzt, da wir in [Google Colab](https://colab.research.google.com/) arbeiten werden.
@@ -97,3 +98,11 @@ Sie sind nützlich, um bestimmte **Muster und Zusammenhänge in den Daten** zu e
 
 ## Autor
 Elisabeth Wadler
+
+## Referenzen
+https://www.bigdata-insider.de/was-ist-machine-learning-a-592092/
+https://www.bigdata-insider.de/was-ist-ein-convolutional-neural-network-a-801246/#:~:text=Die%20Convolutional%2DSchicht%20ist%20die,erfolgt%20in%20Form%20einer%20Matrix.
+https://www.bigdata-insider.de/was-ist-ein-neuronales-netz-a-686185/
+https://keras.io/
+https://machinelearningmastery.com/how-to-develop-a-convolutional-neural-network-to-classify-photos-of-dogs-and-cats/
+Deep Learning with Python by Francois Chollet
