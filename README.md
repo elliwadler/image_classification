@@ -36,9 +36,9 @@ Der Datensatz enthält **3000 Bilder** von Hunden und Katzen mit den **Labels**:
 
 ## Wie funktionierts?
 1. Daten vorbereiten
-2. Model definieren
-3. Model trainieren
-4. Model validieren 
+2. Modell definieren
+3. Modell trainieren
+4. Modell validieren 
 
 ### Daten vorbereiten
 Grundsätzlich werden bei der Ersellung eines Bildklassifizierungsmodell drei seperate Datensätze benötigt:
@@ -49,15 +49,46 @@ Grundsätzlich werden bei der Ersellung eines Bildklassifizierungsmodell drei se
 
 Es muss sichergestellt werden, dass alle Bilder **richtig kategorisiert** wurden. Die Bilder müssen alle auf die gleiche Größe skaliert werden. Es ist üblich **Augmenterungstechniken** (drehen, zoomen, spiegeln, ...) auf die Bilder im Trainingsdatensatz anzuwenden. So kann ein kleiner Datensatz künstlicher vergrößert werden.
 
-### Model definieren
-In TensorFlow kann mithilfe der Keras-API ein mehrschichtiges neuronales Netz definiert werden. In unserem Beispiel wird damit ein sequenzielles neuronales Netz aufgebaut. Die Ausgabe einer jeden Schicht dient dabei als Eingabe der nächsten Schicht. Die Netztopologie kann somit einfach von oben nach unten gelesen werden.
+### Modell definieren
+In TensorFlow kann mithilfe der Keras-API ein mehrschichtiges neuronales Netz/Modell definiert werden. In unserem Beispiel wird damit ein sequenzielles neuronales Netz aufgebaut. Die Ausgabe einer jeden Schicht dient dabei als Eingabe der nächsten Schicht. Die Netztopologie kann somit einfach von oben nach unten gelesen werden. In diesem wird auch der Kompelierungsprozess definiert. 
 
 ![model](/model_definition.png)  
 
-In diesem neuronalen Netz, auch Modell genannt, wird in der ersten Schicht die Dimensionierung der Eingaben mit dem Parameter input_shape festgelegt. Unser Datensatz enthält Bilder der Größe von 150 x 150 Pixeln und drei Farbkanäle. Als erste Schicht wird eine Convolution angewandt, welche auf dem Eingabebild eine Faltung mit 32 Filtern durchführt. Dadurch ergibt sich als Resultat eine Ausgabe der Dimensionierung 148 x 148 x 32.  
+#### Verwendete Schichten
+- **Convolutional-Schicht / Faltungsebenen** \
+Kann in den Eingabedaten einzelne **Merkmale erkennen** und extrahieren.  Dabei werden **kleine Filterkerne** über das Eingangsbild bewegt, um Merkmale zu extrahieren. Jeder Filterkern lernt verschiedene Merkmale zu erkennen, wie z. B. Kanten, Texturen oder bestimmte Formen. Es können die Parameter Anzahl der Filterkerne, Größe der Filterkerne, Aktivierungsfunktion und erwartetes Eingabeformat definiert werden
 
-Der Aufbau des gesamten neuronalen Netzes ist damit definiert. Mit Zeile acht können Details zum neuronalen Netz ausgegeben werden. Die Ausgabe enthält die gerade konfigurierten Werte sowie die Anzahl der lernbaren Parameter. Die Anzahl der Parameter der einzelnen Schichten kann einen Eindruck ihrer Berechnungskomplexität vermitteln.
-            
+- **Pooling-Schicht / Subsampling-Schich** \
+Verdichtet und Reduziert die Auflösung der erkannten Merkmale. Das Pooling **verwirft überflüssige Informationen** und behält gleichzeitig wichtige Merkmale. Die MaxPooling2D-Schicht verwendet die Max-Pooling-Operation, bei der der maximalste Wert innerhalb des Pooling-Fensters ausgewählt wird. Dieser Wert wird dann in der Ausgabe beibehalten, während andere Werte verworfen werden. Dadurch werden wichtige Merkmale mit maximaler Aktivierung beibehalten.
+
+- **Dropout-Schicht** \
+Dient zur **Vermeidung von "Overfitting"**. Die Schicht gibt and, dass während eines Trainingsschrittes ein zufälliger Teil der Neuronen ignoriert wird. (Bsp. Dropout(0.3) = 30% der Neuronen werden ignoriert/verworfen) Dadurch wird verhindert, dass sich Neuronen im Modell zu stark auf bestimmte Eingaben oder Merkmale spezialisieren.
+
+- **Flatten**
+Der Flatten-Layer in einem sequenziellen Modell in Keras wird verwendet, um die **Dimensionalität** der Daten vor dem Übergang zu den dichten (fully connected) Schichten zu **reduzieren**. Dabei nimmt er die Ausgabe der vorherigen Schicht und wandelt sie in einen **eindimensionalen Vektor** um. Die Hauptaufgabe der Flatten-Schicht ist es die Daten in ein Format zu bringen, das von der nachfolgenden (Dense-Schicht) verarbeitet werden kann. 
+
+- **Dense**
+Enthält vollständig verbundene Neuronen/Units. Es ist die **grundlegende Schicht für die Neuronenverbindung** in einem neuralem Netzwerk. Der Dense Layer empfängt einen eindimensionalen Vektor und wendet eine **lineare Transformation** auf ihn an, gefolgt von einer **Aktivierungsfunktion**. Die Dense-Layer ermöglichen es dem Modell, **komplexe nichtlineare Zusammenhänge zwischen den Eingabedaten** zu lernen. Durch die Kombination der linearen Transformation und der Aktivierungsfunktion kann der Dense-Layer komplexe Muster erkennen und extrahieren. Es können verschiedene Parameter eingestellt werden: Anzahl der Neuronen im Layer, die Aktivierungsfunktion. Die **Sigmoid-Aktivierungsfunktion** wird für die binäre Klassifikation verwendet. Da die Sigmoid-Funktion den Bereich zwischen 0 und 1 abdeckt, kann sie verwendet werden, um die Wahrscheinlichkeit zu berechnen, dass eine Eingabe zu einer bestimmten Klasse gehört. 
+
+### Modell trainieren 
+Nachdem das Modell definiert wurde kann es Trainiert werden. Dazu wurd die model.fit Methode verwendet. Der Methode werden die Trainings- und Validierungsdaten übergeben. Zudem werden die Anzahl der Epochen als auch Schritte pro Epoche festgelegt. 
+
+### Modell valideren 
+Um Aussagen über die Qualität des Modells treffen zu können gibt es einige Validierungsmethoden. Die Modellvalidierung ist ein wichtiger Schritt des Entwicklungsprozesses von Systemen des maschinellen Lernens, da sie dazu beiträgt sicherzustellen, dass das Modell die beabsichtigte Leistung erbringt und ungesehene Daten verarbeiten kann.
+
+#### Confusion Matrix
+Ist ein Werkzeug zur Bewertung der Leistung eines Klassifikationsmodells. Sie bietet eine detaillierte Übersicht über die Anzahl der richtigen und falschen Vorhersagen des Modells für jede Klasse.
+
+#### Model.evaluate()
+Gibt loss und accuracy für den gegebenen Datensatz zurück.\
+**Loss (Verlust)**: Der Loss-Wert ist ein Maß fürt den Unterschied zwischen den vorhergesagten Wahrscheinlichkeitsverteilungen für die verschiedenen Klassen und den tatsächlichen Labelwerten. \
+**Accuracy (Genauigkeit)**: Die Genauigkeit ist ein Metrikwert, der angibt, wie gut das Modell bei der Vorhersage der richtigen Klasse ist. Sie wird oft als Prozentsatz angegeben und gibt an, wie viele Beispiele in der Testdatenmenge korrekt klassifiziert wurden. Eine Genauigkeit von 1,0 bedeutet, dass das Modell alle Beispiele richtig klassifiziert hat, während eine Genauigkeit von 0,5 bedeutet, dass das Modell zufällige Vorhersagen macht.
+
+### Heatmap
+Eine Heatmap ist eine visuelle Darstellung von Daten, die in Form einer Farbskala dargestellt werden. 
+Sie sind nützlich um bestimmte Muster und Zusammenhänge in den Daten zu erkennen. Zum Beispiel kann man sie nutzen, um zu sehen, welche Bereiche in einem Bild am meisten Aktivität aufweisen, also für das Model am relevantesten für die Klassifizierung sind. 
+
+
 ## Autor
 Elisabeth Wadler
 
