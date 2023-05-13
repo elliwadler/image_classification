@@ -84,6 +84,9 @@ Gibt loss und accuracy für den gegebenen Datensatz zurück.\
 **Loss (Verlust)**: Der Loss-Wert ist ein Maß fürt den Unterschied zwischen den vorhergesagten Wahrscheinlichkeitsverteilungen für die verschiedenen Klassen und den tatsächlichen Labelwerten. \
 **Accuracy (Genauigkeit)**: Die Genauigkeit ist ein Metrikwert, der angibt, wie gut das Modell bei der Vorhersage der richtigen Klasse ist. Sie wird oft als Prozentsatz angegeben und gibt an, wie viele Beispiele in der Testdatenmenge korrekt klassifiziert wurden. Eine Genauigkeit von 1,0 bedeutet, dass das Modell alle Beispiele richtig klassifiziert hat, während eine Genauigkeit von 0,5 bedeutet, dass das Modell zufällige Vorhersagen macht.
 
+#### f1-score
+Der F1-Score ist eine Metrik zur Bewertung der Leistung eines Klassifikationsmodells, insbesondere bei ungleich verteilten Klassen oder wenn sowohl Präzision als auch Recall wichtig sind.
+
 ### Heatmap
 Eine Heatmap ist eine visuelle Darstellung von Daten, die in Form einer Farbskala dargestellt werden. 
 Sie sind nützlich um bestimmte Muster und Zusammenhänge in den Daten zu erkennen. Zum Beispiel kann man sie nutzen, um zu sehen, welche Bereiche in einem Bild am meisten Aktivität aufweisen, also für das Model am relevantesten für die Klassifizierung sind. 
