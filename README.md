@@ -100,9 +100,9 @@ Sie sind nützlich, um bestimmte **Muster und Zusammenhänge in den Daten** zu e
 Elisabeth Wadler
 
 ## Referenzen
-https://www.bigdata-insider.de/was-ist-machine-learning-a-592092/
-https://www.bigdata-insider.de/was-ist-ein-convolutional-neural-network-a-801246/#:~:text=Die%20Convolutional%2DSchicht%20ist%20die,erfolgt%20in%20Form%20einer%20Matrix.
-https://www.bigdata-insider.de/was-ist-ein-neuronales-netz-a-686185/
-https://keras.io/
-https://machinelearningmastery.com/how-to-develop-a-convolutional-neural-network-to-classify-photos-of-dogs-and-cats/
-Deep Learning with Python by Francois Chollet
+https://www.bigdata-insider.de/was-ist-machine-learning-a-592092/ \
+https://www.bigdata-insider.de/was-ist-ein-convolutional-neural-network-a-801246/#:~:text=Die%20Convolutional%2DSchicht%20ist%20die,erfolgt%20in%20Form%20einer%20Matrix. \
+https://www.bigdata-insider.de/was-ist-ein-neuronales-netz-a-686185/ \
+https://keras.io/ \
+https://machinelearningmastery.com/how-to-develop-a-convolutional-neural-network-to-classify-photos-of-dogs-and-cats/ \
+Deep Learning with Python by Francois Chollet 
